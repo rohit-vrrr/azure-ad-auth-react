@@ -1,0 +1,23 @@
+.thankyouContainer {
+    width: 100vw;
+    height: 100vh;
+    background: lightgrey;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.thankyouContainer .azureLogo {
+    width: 250px;
+}
+
+.thankyouContainer .para {
+    font-size: 1.25rem;
+}
+
+.thankyouContainer .homeBtn {
+    height: 50px;
+    width: 200px;
+    font-size: 1.25rem;
+}
