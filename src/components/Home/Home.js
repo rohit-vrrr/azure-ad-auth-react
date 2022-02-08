@@ -1,18 +1,16 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import * as msal from "@azure/msal-browser";
 
 import styles from "./home.module.css";
 import { Button } from "@mui/material";
 import AzureLogo from "../../assets/azure-logo.png";
-import { msalConfig, scopes } from "../../config.js";
+import { msalConfig, scopes, homeAccountId } from "../../config.js";
 
 const Home = () => {
 
     const [ isAuthenticated, setIsAuthenticated ] = useState(false);
-    const [ user, setUser ] = useState({});
-    const [ error, setError ] = useState(null);
-    const navigate = useNavigate();
+    // const [ user, setUser ] = useState({});
+    // const [ error, setError ] = useState(null);
 
     const msalInstance = new msal.PublicClientApplication(msalConfig);
 
@@ -23,22 +21,21 @@ const Home = () => {
                 prompt: 'select_account'
             }).then(() => {
                 setIsAuthenticated(true);
-                setError(null);
+                // setError(null);
             });
         } catch(err) {
             setIsAuthenticated(false);
-            setUser({});
-            setError(err);
+            // setUser({});
+            // setError(err);
         }
     }
 
     const logout = async () => {
-        navigate('/thank-you');
-        // const currentAccount = msalInstance.getAccountByHomeId(homeAccountId);
-        // await msalInstance.logoutRedirect({
-        //     account: currentAccount,
-        //     postLogoutRedirectUri: 'http://localhost:3000/thank-you'
-        // });
+        const currentAccount = msalInstance.getAccountByHomeId(homeAccountId);
+        await msalInstance.logoutRedirect({
+            account: currentAccount,
+            postLogoutRedirectUri: 'http://localhost:3000/thank-you'
+        });
     }
 
     return (

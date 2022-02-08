@@ -11,3 +11,5 @@ export const msalConfig = {
 };
 
 export const scopes = [ 'user.read' ];
+
+export const homeAccountId = 'homeAccountID';
